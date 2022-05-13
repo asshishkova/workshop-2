@@ -32,6 +32,7 @@ avengers.forEach (avenger => {
 });
 
 function onStoneClicked(selectedStone) {
+  document.body.style.background = "";
   if (selectedStone.classList.contains(selected)) {
     selectedStone.classList.remove(selected);
     selectedData.name = "";
@@ -46,6 +47,7 @@ function onStoneClicked(selectedStone) {
 }
 
 function onAvengerClicked(avenger) {
+  document.body.style.background = "";
   avenger.classList.toggle(selected);
   if (selectedData.avengers.includes(avenger.id)) {
     selectedData.avengers.splice(selectedData.avengers.indexOf(avenger.id), 1);
@@ -61,15 +63,28 @@ glove.addEventListener('click', ({target}) => {
 
 function onGloveClicked() {
   if (selectedData.name === "") {
-    console.log("nothing is chosen");
+    console.log("stone is not chosen");
   } else {
+    let result = true;
     const answer = endGameData.find(object => object.name === selectedData.name);
     console.log(answer);
     console.log(selectedData);
     if (answer.avengers.length === selectedData.avengers.length) {
-      console.log('almost done')
+      answer.avengers.sort();
+      selectedData.avengers.sort();
+      for (let i = 0; i < answer.avengers.length; i++) {
+        if (answer.avengers[i] !== selectedData.avengers[i]) {
+          result = false;
+        }
+      }
     } else {
-      console.log('not at all');
+      result = false;;
+    }
+    console.log(result);
+    if (result) {
+      document.body.style.background = "green";
+    } else {
+      document.body.style.background = "red";
     }
   }
 }
