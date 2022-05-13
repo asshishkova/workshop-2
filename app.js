@@ -15,19 +15,57 @@ const endGameData = [{
 const stones = document.querySelectorAll('.stone');
 const avengers = document.querySelectorAll('.avenger');
 const glove = document.querySelector('.infinity_glove');
+const selected = "selected";
+
+let selectedData = { name: "", avengers: []};
 
 stones.forEach (stone => {
   stone.addEventListener('click', ({target}) => {
-    onElementClicked(target);
+    onStoneClicked(target);
   });
 });
 
 avengers.forEach (avenger => {
   avenger.addEventListener('click', ({target}) => {
-    onElementClicked(target);
+    onAvengerClicked(target);
   });
 });
 
-function onElementClicked(element) {
-  element.classList.toggle("selected");
+function onStoneClicked(selectedStone) {
+  if (selectedStone.classList.contains(selected)) {
+    selectedStone.classList.remove(selected);
+    selectedData.name = "";
+  } else {
+    stones.forEach (stone => {
+      stone.classList.remove(selected);
+    });
+    selectedStone.classList.add(selected);
+    selectedData.name = selectedStone.id;
+  }
+  // console.log(selectedData.name);
+}
+
+function onAvengerClicked(avenger) {
+  avenger.classList.toggle(selected);
+  if (selectedData.avengers.includes(avenger.id)) {
+    selectedData.avengers.splice(selectedData.avengers.indexOf(avenger.id), 1);
+  } else {
+    selectedData.avengers.push(avenger.id);
+  }
+  // console.log(selectedData.avengers)
+}
+
+glove.addEventListener('click', ({target}) => {
+  onGloveClicked();
+});
+
+function onGloveClicked() {
+  const answer = endGameData.find(object => object.name === selectedData.name);
+  console.log(answer);
+  console.log(selectedData);
+  // if (answer.avengers.length === selectedData.avengers.length) {
+
+  // } else {
+
+  // }
 }

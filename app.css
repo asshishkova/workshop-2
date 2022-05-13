@@ -49,4 +49,5 @@
 
 .selected {
   background-color: aqua;
+  border-radius: 50%;
 }
