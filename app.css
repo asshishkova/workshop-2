@@ -51,3 +51,8 @@
   background-color: aqua;
   border-radius: 50%;
 }
+
+.done {
+  background-color: gray;
+  opacity: 50%;
+}

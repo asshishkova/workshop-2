@@ -63,12 +63,12 @@ glove.addEventListener('click', ({target}) => {
 
 function onGloveClicked() {
   if (selectedData.name === "") {
-    console.log("stone is not chosen");
+    document.body.style.background = "";
   } else {
     let result = true;
     const answer = endGameData.find(object => object.name === selectedData.name);
-    console.log(answer);
-    console.log(selectedData);
+    // console.log(answer);
+    // console.log(selectedData);
     if (answer.avengers.length === selectedData.avengers.length) {
       answer.avengers.sort();
       selectedData.avengers.sort();
@@ -80,11 +80,24 @@ function onGloveClicked() {
     } else {
       result = false;;
     }
-    console.log(result);
+    // console.log(result);
     if (result) {
       document.body.style.background = "green";
+      // console.log(selectedData.avengers);
+      selectedData.avengers.forEach (avenger => {
+        // console.log(avengers);
+        const avengerObject = Array.from(avengers).find(object => object.id === avenger);
+        avengerObject.classList.remove(selected);
+        avengerObject.classList.add("done");
+      });
+
+      const stoneObject = Array.from(stones).find(object => object.id === selectedData.name);
+      stoneObject.classList.remove(selected);
+      stoneObject.classList.add("done");
+
     } else {
       document.body.style.background = "red";
     }
+    selectedData = { name: "", avengers: []};
   }
 }
