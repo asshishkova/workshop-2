@@ -60,12 +60,16 @@ glove.addEventListener('click', ({target}) => {
 });
 
 function onGloveClicked() {
-  const answer = endGameData.find(object => object.name === selectedData.name);
-  console.log(answer);
-  console.log(selectedData);
-  // if (answer.avengers.length === selectedData.avengers.length) {
-
-  // } else {
-
-  // }
+  if (selectedData.name === "") {
+    console.log("nothing is chosen");
+  } else {
+    const answer = endGameData.find(object => object.name === selectedData.name);
+    console.log(answer);
+    console.log(selectedData);
+    if (answer.avengers.length === selectedData.avengers.length) {
+      console.log('almost done')
+    } else {
+      console.log('not at all');
+    }
+  }
 }
